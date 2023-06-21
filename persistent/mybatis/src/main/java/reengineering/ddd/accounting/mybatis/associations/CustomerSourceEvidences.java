@@ -14,33 +14,33 @@ public class CustomerSourceEvidences extends EntityList<String, SourceEvidence<?
     private String customerId;
 
     @Inject
-    private Dao mapper;
+    private Dao dao;
 
     @Override
     protected List<SourceEvidence<?>> findEntities(int from, int to) {
-        return mapper.findSourceEvidencesByCustomerId(customerId, from, to - from);
+        return dao.findSourceEvidencesByCustomerId(customerId, from, to - from);
     }
 
     @Override
     protected SourceEvidence<?> findEntity(String id) {
-        return mapper.findSourceEvidenceByCustomerAndId(customerId, id);
+        return dao.findSourceEvidenceByCustomerAndId(customerId, id);
     }
 
     @Override
     public SourceEvidence<?> add(SourceEvidenceDescription description) {
         IdHolder holder = new IdHolder();
         // insert into source_evidences(customer_id, `type`) values(customerId, 'sales-settlement')
-        mapper.insertSourceEvidence(holder, customerId, description);
+        dao.insertSourceEvidence(holder, customerId, description);
 
         // insert(sales_settlements)
         // insert(sales_settlement_details)
-        mapper.insertSourceEvidenceDescription(holder.id(), description);
+        dao.insertSourceEvidenceDescription(holder.id(), description);
 
-        return mapper.findSourceEvidenceByCustomerAndId(customerId, holder.id());
+        return dao.findSourceEvidenceByCustomerAndId(customerId, holder.id());
     }
 
     @Override
     public int size() {
-        return mapper.countSourceEvidencesByCustomer(customerId);
+        return dao.countSourceEvidencesByCustomer(customerId);
     }
 }

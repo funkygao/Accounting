@@ -15,28 +15,28 @@ public class AccountTransactions extends EntityList<String, Transaction> impleme
     private String accountId;
 
     @Inject
-    private Dao mapper;
+    private Dao dao;
 
     @Override
     protected List<Transaction> findEntities(int from, int to) {
-        return mapper.findTransactionsByAccountId(accountId, from, to - from);
+        return dao.findTransactionsByAccountId(accountId, from, to - from);
     }
 
     @Override
     protected Transaction findEntity(String id) {
-        return mapper.findTransactionByAccountAndId(accountId, id);
+        return dao.findTransactionByAccountAndId(accountId, id);
     }
 
     @Override
     public int size() {
-        return mapper.countTransactionsInAccount(accountId);
+        return dao.countTransactionsInAccount(accountId);
     }
 
     @Override
     public Transaction add(Account account, SourceEvidence<?> evidence, TransactionDescription description) {
         IdHolder holder = new IdHolder();
         // insert transactions
-        mapper.insertTransaction(holder, account.getIdentity(), evidence.getIdentity(), description);
-        return mapper.findTransactionByAccountAndId(accountId, holder.id());
+        dao.insertTransaction(holder, account.getIdentity(), evidence.getIdentity(), description);
+        return dao.findTransactionByAccountAndId(accountId, holder.id());
     }
 }

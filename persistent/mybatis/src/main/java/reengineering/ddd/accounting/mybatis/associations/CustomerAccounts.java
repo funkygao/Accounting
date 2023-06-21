@@ -10,12 +10,12 @@ import javax.inject.Inject;
 public class CustomerAccounts extends EntityList<String, Account> implements Customer.Accounts {
 
     @Inject
-    private Dao mapper;
+    private Dao dao;
 
     private String customerId;
 
     @Override
     public void update(Account account, Account.AccountChange change) {
-        mapper.updateAccount(customerId, account.getIdentity(), change);
+        dao.updateAccount(customerId, account.getIdentity(), change);
     }
 }

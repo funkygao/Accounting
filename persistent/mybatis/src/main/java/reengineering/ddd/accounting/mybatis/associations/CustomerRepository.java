@@ -10,15 +10,15 @@ import java.util.Optional;
 
 @Component
 public class CustomerRepository implements reengineering.ddd.accounting.model.CustomerRepository {
-    private Dao mapper;
+    private Dao dao;
 
     @Inject
-    public CustomerRepository(Dao mapper) {
-        this.mapper = mapper;
+    public CustomerRepository(Dao dao) {
+        this.dao = dao;
     }
 
     @Override
     public Optional<Customer> findById(String id) {
-        return Optional.ofNullable(mapper.findCustomerById(id));
+        return Optional.ofNullable(dao.findCustomerById(id));
     }
 }
