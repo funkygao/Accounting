@@ -54,7 +54,7 @@ public class CustomerTest {
         when(accounts.findByIdentity(eq("CASH-02"))).thenReturn(Optional.of(cash02));
 
         Customer customer = new Customer("id", new CustomerDescription("John Smith", "john.smith@email.com"), evidences, accounts);
-        assertSame(evidence, customer.add(description));
+        assertSame(evidence, customer.addSourceEvidence(description));
         assertEquals(2, cash1Tx.descriptions.size());
         assertEquals(2, cash2Tx.descriptions.size());
 
@@ -74,7 +74,7 @@ public class CustomerTest {
         when(accounts.findByIdentity(eq("CASH-01"))).thenReturn(Optional.empty());
 
         Customer customer = new Customer("id", new CustomerDescription("John Smith", "john.smith@email.com"), evidences, accounts);
-        assertThrows(AccountNotFoundException.class, () -> customer.add(description));
+        assertThrows(AccountNotFoundException.class, () -> customer.addSourceEvidence(description));
     }
 
     static class TransactionList implements Account.Transactions {

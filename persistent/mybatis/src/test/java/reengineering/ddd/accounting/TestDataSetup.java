@@ -38,7 +38,7 @@ public class TestDataSetup implements BeforeAllCallback {
                     new SalesSettlementDescription.Detail(Amount.cny("100.00"))
             );
 
-            customer.add(description);
+            customer.addSourceEvidence(description);
         }
     }
 }

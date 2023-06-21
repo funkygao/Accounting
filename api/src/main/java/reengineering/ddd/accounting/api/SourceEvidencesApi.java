@@ -1,23 +1,17 @@
 package reengineering.ddd.accounting.api;
 
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.Link;
 import reengineering.ddd.accounting.api.representation.SourceEvidenceModel;
 import reengineering.ddd.accounting.api.representation.SourceEvidenceReader;
-import reengineering.ddd.accounting.api.representation.TransactionModel;
-import reengineering.ddd.accounting.model.Account;
 import reengineering.ddd.accounting.model.Customer;
 import reengineering.ddd.accounting.model.SourceEvidence;
-import reengineering.ddd.archtype.Many;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.util.stream.Collectors;
 
-import static reengineering.ddd.accounting.api.ApiTemplates.accountTransactions;
 import static reengineering.ddd.accounting.api.ApiTemplates.sourceEvidences;
 
 public class SourceEvidencesApi {
@@ -47,7 +41,7 @@ public class SourceEvidencesApi {
 
     @POST
     public Response create(String json, @Context UriInfo info) {
-        SourceEvidence evidence = customer.add(reader.read(json)
+        SourceEvidence evidence = customer.addSourceEvidence(reader.read(json)
                 .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_ACCEPTABLE)).description());
         return Response.created(ApiTemplates.sourceEvidence(info).build(customer.getIdentity(), evidence.getIdentity())).build();
     }

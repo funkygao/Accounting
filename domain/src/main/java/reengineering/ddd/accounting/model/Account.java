@@ -35,7 +35,7 @@ public class Account implements Entity<String, AccountDescription> {
     }
 
     // 核心逻辑：把所有记账流水记录到本账户下 [transactions] TODO 不关内存，会插库
-    public AccountChange add(SourceEvidence<?> evidence, List<TransactionDescription> descriptions) {
+    public AccountChange addTransactionsWithSourceEvidence(SourceEvidence<?> evidence, List<TransactionDescription> descriptions) {
         BigDecimal total = BigDecimal.ZERO;
         for (TransactionDescription transactionDescription : descriptions) {
             // insert transactions

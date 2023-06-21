@@ -34,8 +34,12 @@ public class Customer implements Entity<String, CustomerDescription> {
         this.accounts = accounts;
     }
 
+    public HasMany<String, Account> accounts() {
+        return accounts;
+    }
+
     // TODO 核心逻辑：插入(原始凭证，记账流水)、更改账户余额 [accounts, transactions, (source_evidences, sales_settlements, sales_settlement_details)]
-    public SourceEvidence<?> add(SourceEvidenceDescription description) {
+    public SourceEvidence<?> addSourceEvidence(SourceEvidenceDescription description) {
         // insert (source_evidences, sales_settlements, sales_settlement_details)
         SourceEvidence<?> evidence = sourceEvidences.add(description);
 
@@ -44,7 +48,7 @@ public class Customer implements Entity<String, CustomerDescription> {
             // 通过关联对象找到账户实体，TODO 遍历里查找每一个Account对象
             Account account = accounts.findByIdentity(accountId).orElseThrow(() -> new AccountNotFoundException(accountId));
             // insert transactions
-            AccountChange accountChange = account.add(evidence, transactions.get(accountId));
+            AccountChange accountChange = account.addTransactionsWithSourceEvidence(evidence, transactions.get(accountId));
             // update accounts
             accounts.update(account, accountChange);
         }
