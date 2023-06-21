@@ -25,11 +25,13 @@ public class CustomerApi {
 
     @Path("source-evidences")
     public SourceEvidencesApi sourceEvidences(@Context ResourceContext context) {
+        // link 到 SourceEvidencesApi
         return context.initResource(new SourceEvidencesApi(customer));
     }
 
     @Path("accounts")
     public AccountsApi accounts() {
+        // link 到 AccountsApi
         return new AccountsApi(customer);
     }
 }

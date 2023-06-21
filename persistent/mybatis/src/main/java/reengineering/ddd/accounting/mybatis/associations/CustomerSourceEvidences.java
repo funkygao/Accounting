@@ -36,6 +36,7 @@ public class CustomerSourceEvidences extends EntityList<String, SourceEvidence<?
         // insert(sales_settlement_details)
         dao.insertSourceEvidenceDescription(holder.id(), description);
 
+        // 把它的transactions带出来
         return dao.findSourceEvidenceByCustomerAndId(customerId, holder.id());
     }
 

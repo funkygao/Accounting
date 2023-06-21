@@ -38,6 +38,10 @@ public class Customer implements Entity<String, CustomerDescription> {
         return accounts;
     }
 
+    public HasMany<String, SourceEvidence<?>> sourceEvidences() {
+        return sourceEvidences;
+    }
+
     // TODO 核心逻辑：插入(原始凭证，记账流水)、更改账户余额 [accounts, transactions, (source_evidences, sales_settlements, sales_settlement_details)]
     public SourceEvidence<?> addSourceEvidence(SourceEvidenceDescription description) {
         // insert (source_evidences, sales_settlements, sales_settlement_details)
