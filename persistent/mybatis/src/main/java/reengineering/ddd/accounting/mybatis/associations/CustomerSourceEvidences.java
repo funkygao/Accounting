@@ -3,7 +3,7 @@ package reengineering.ddd.accounting.mybatis.associations;
 import reengineering.ddd.accounting.description.SourceEvidenceDescription;
 import reengineering.ddd.accounting.model.Customer;
 import reengineering.ddd.accounting.model.SourceEvidence;
-import reengineering.ddd.accounting.mybatis.ModelMapper;
+import reengineering.ddd.accounting.mybatis.Dao;
 import reengineering.ddd.mybatis.database.EntityList;
 import reengineering.ddd.mybatis.support.IdHolder;
 
@@ -14,7 +14,7 @@ public class CustomerSourceEvidences extends EntityList<String, SourceEvidence<?
     private String customerId;
 
     @Inject
-    private ModelMapper mapper;
+    private Dao mapper;
 
     @Override
     protected List<SourceEvidence<?>> findEntities(int from, int to) {

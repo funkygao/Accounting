@@ -13,7 +13,7 @@ import reengineering.ddd.mybatis.support.IdHolder;
 import java.util.List;
 
 @Mapper
-public interface ModelMapper {
+public interface Dao {
     Customer findCustomerById(String id);
 
     List<SourceEvidence<?>> findSourceEvidencesByCustomerId(@Param("customer_id") String customerId,

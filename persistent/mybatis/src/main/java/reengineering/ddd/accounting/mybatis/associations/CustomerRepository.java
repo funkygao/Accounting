@@ -2,7 +2,7 @@ package reengineering.ddd.accounting.mybatis.associations;
 
 import org.springframework.stereotype.Component;
 import reengineering.ddd.accounting.model.Customer;
-import reengineering.ddd.accounting.mybatis.ModelMapper;
+import reengineering.ddd.accounting.mybatis.Dao;
 
 import javax.inject.Inject;
 import java.util.Optional;
@@ -10,10 +10,10 @@ import java.util.Optional;
 
 @Component
 public class CustomerRepository implements reengineering.ddd.accounting.model.CustomerRepository {
-    private ModelMapper mapper;
+    private Dao mapper;
 
     @Inject
-    public CustomerRepository(ModelMapper mapper) {
+    public CustomerRepository(Dao mapper) {
         this.mapper = mapper;
     }
 

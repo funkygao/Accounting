@@ -4,7 +4,7 @@ import reengineering.ddd.accounting.description.TransactionDescription;
 import reengineering.ddd.accounting.model.Account;
 import reengineering.ddd.accounting.model.SourceEvidence;
 import reengineering.ddd.accounting.model.Transaction;
-import reengineering.ddd.accounting.mybatis.ModelMapper;
+import reengineering.ddd.accounting.mybatis.Dao;
 import reengineering.ddd.mybatis.database.EntityList;
 import reengineering.ddd.mybatis.support.IdHolder;
 
@@ -15,7 +15,7 @@ public class AccountTransactions extends EntityList<String, Transaction> impleme
     private String accountId;
 
     @Inject
-    private ModelMapper mapper;
+    private Dao mapper;
 
     @Override
     protected List<Transaction> findEntities(int from, int to) {

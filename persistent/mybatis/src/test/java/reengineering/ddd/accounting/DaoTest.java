@@ -8,7 +8,7 @@ import reengineering.ddd.accounting.description.TransactionDescription;
 import reengineering.ddd.accounting.description.basic.Amount;
 import reengineering.ddd.accounting.description.basic.Ref;
 import reengineering.ddd.accounting.model.*;
-import reengineering.ddd.accounting.mybatis.ModelMapper;
+import reengineering.ddd.accounting.mybatis.Dao;
 import reengineering.ddd.archtype.Many;
 import reengineering.ddd.mybatis.support.IdHolder;
 
@@ -21,9 +21,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MybatisTest
-public class ModelMapperTest {
+public class DaoTest {
     @Inject
-    private ModelMapper mapper;
+    private Dao mapper;
     @Inject
     private TestDataMapper testData;
 
