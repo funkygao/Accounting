@@ -7,7 +7,7 @@ import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.context.annotation.Import;
 import reengineering.ddd.accounting.description.basic.Amount;
 import reengineering.ddd.accounting.model.*;
-import reengineering.ddd.accounting.mybatis.associations.Customers;
+import reengineering.ddd.accounting.mybatis.associations.CustomerRepository;
 import reengineering.ddd.archtype.Many;
 
 import javax.inject.Inject;
@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AssociationsTest {
 
     @Inject
-    private Customers customers;
+    private CustomerRepository customers;
 
     private String customerId = "1";
     private String accountId = "1";

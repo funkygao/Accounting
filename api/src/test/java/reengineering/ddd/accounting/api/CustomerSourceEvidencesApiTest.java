@@ -9,7 +9,6 @@ import reengineering.ddd.accounting.api.representation.SourceEvidenceReader;
 import reengineering.ddd.accounting.api.representation.SourceEvidenceRequest;
 import reengineering.ddd.accounting.description.AccountDescription;
 import reengineering.ddd.accounting.description.CustomerDescription;
-import reengineering.ddd.accounting.description.SourceEvidenceDescription;
 import reengineering.ddd.accounting.description.TransactionDescription;
 import reengineering.ddd.accounting.description.basic.Amount;
 import reengineering.ddd.accounting.description.basic.Currency;
@@ -31,7 +30,7 @@ import static org.mockito.Mockito.when;
 
 public class CustomerSourceEvidencesApiTest extends ApiTest {
     @MockBean
-    private Customers customers;
+    private CustomerRepository customerRepository;
     private Customer customer;
     @Mock
     private Customer.SourceEvidences sourceEvidences;
@@ -54,7 +53,7 @@ public class CustomerSourceEvidencesApiTest extends ApiTest {
     @BeforeEach
     public void before() {
         customer = new Customer("john.smith", new CustomerDescription("John Smith", "john.smith@email.com"), sourceEvidences, mock(Customer.Accounts.class));
-        when(customers.findById(eq(customer.getIdentity()))).thenReturn(Optional.of(customer));
+        when(customerRepository.findById(eq(customer.getIdentity()))).thenReturn(Optional.of(customer));
 
         when(evidence.getIdentity()).thenReturn("EV-001");
         when(evidence.getDescription()).thenReturn(new EvidenceDescription("ORD-001"));

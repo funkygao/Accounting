@@ -9,11 +9,11 @@ import java.util.Optional;
 
 
 @Component
-public class Customers implements reengineering.ddd.accounting.model.Customers {
+public class CustomerRepository implements reengineering.ddd.accounting.model.CustomerRepository {
     private ModelMapper mapper;
 
     @Inject
-    public Customers(ModelMapper mapper) {
+    public CustomerRepository(ModelMapper mapper) {
         this.mapper = mapper;
     }
 

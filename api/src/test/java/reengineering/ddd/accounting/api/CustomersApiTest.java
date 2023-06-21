@@ -8,7 +8,7 @@ import reengineering.ddd.accounting.description.CustomerDescription;
 import reengineering.ddd.accounting.description.basic.Amount;
 import reengineering.ddd.accounting.model.Account;
 import reengineering.ddd.accounting.model.Customer;
-import reengineering.ddd.accounting.model.Customers;
+import reengineering.ddd.accounting.model.CustomerRepository;
 
 import java.util.Optional;
 
@@ -20,11 +20,11 @@ import static org.mockito.Mockito.when;
 
 public class CustomersApiTest extends ApiTest {
     @MockBean
-    private Customers customers;
+    private CustomerRepository customerRepository;
 
     @Test
     public void should_return_404_if_customer_not_exist() {
-        when(customers.findById(eq("inexist"))).thenReturn(Optional.empty());
+        when(customerRepository.findById(eq("inexist"))).thenReturn(Optional.empty());
 
         given().accept(MediaTypes.HAL_JSON.toString())
                 .when().get("/customers/inexist").then().statusCode(404);
@@ -39,7 +39,7 @@ public class CustomersApiTest extends ApiTest {
                 new CustomerDescription("John Smith", "john.smith@email.com"),
                 mock(Customer.SourceEvidences.class), accounts);
 
-        when(customers.findById(eq(customer.getIdentity()))).thenReturn(Optional.of(customer));
+        when(customerRepository.findById(eq(customer.getIdentity()))).thenReturn(Optional.of(customer));
         when(accounts.findAll()).thenReturn(new EntityList<>(
                 new Account("1", new AccountDescription(Amount.cny("100.00")), transactions),
                 new Account("2", new AccountDescription(Amount.cny("100.00")), transactions)

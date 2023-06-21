@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 
 public class CustomerAccountTransactionsApiTest extends ApiTest {
     @MockBean
-    private Customers customers;
+    private CustomerRepository customerRepository;
     private Customer customer;
     @Mock
     private Customer.Accounts accounts;
@@ -47,7 +47,7 @@ public class CustomerAccountTransactionsApiTest extends ApiTest {
     @BeforeEach
     public void before() {
         customer = new Customer("john.smith", new CustomerDescription("John Smith", "john.smith@email.com"), mock(Customer.SourceEvidences.class), accounts);
-        when(customers.findById(eq(customer.getIdentity()))).thenReturn(Optional.of(customer));
+        when(customerRepository.findById(eq(customer.getIdentity()))).thenReturn(Optional.of(customer));
 
         account = new Account("CASH-01", new AccountDescription(new Amount(new BigDecimal("0"), Currency.CNY)), transactions);
         when(evidence.getIdentity()).thenReturn("EV-001");

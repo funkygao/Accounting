@@ -8,7 +8,7 @@ import reengineering.ddd.accounting.description.SalesSettlementDescription;
 import reengineering.ddd.accounting.description.basic.Amount;
 import reengineering.ddd.accounting.description.basic.Ref;
 import reengineering.ddd.accounting.model.Customer;
-import reengineering.ddd.accounting.model.Customers;
+import reengineering.ddd.accounting.model.CustomerRepository;
 
 import javax.inject.Inject;
 import java.util.Random;
@@ -20,12 +20,12 @@ public class TestDataRunner implements CommandLineRunner {
 
 
     private TestDataMapper mapper;
-    private Customers customers;
+    private CustomerRepository customerRepository;
 
     @Inject
-    public TestDataRunner(TestDataMapper mapper, Customers customers) {
+    public TestDataRunner(TestDataMapper mapper, CustomerRepository customerRepository) {
         this.mapper = mapper;
-        this.customers = customers;
+        this.customerRepository = customerRepository;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class TestDataRunner implements CommandLineRunner {
         mapper.insertCustomer(customerId, "John Smith", "john.smith@email.com");
         mapper.insertAccount(accountId, customerId, 100.00, "CNY");
 
-        Customer customer = customers.findById(customerId).get();
+        Customer customer = customerRepository.findById(customerId).get();
 
         for (var evidence = 0; evidence < 1000; evidence++) {
             var description = new SalesSettlementDescription(new Ref<>("ORD-" + new Random().nextInt()),

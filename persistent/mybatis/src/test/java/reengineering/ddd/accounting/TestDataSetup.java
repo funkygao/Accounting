@@ -8,7 +8,7 @@ import reengineering.ddd.accounting.description.SalesSettlementDescription;
 import reengineering.ddd.accounting.description.basic.Amount;
 import reengineering.ddd.accounting.description.basic.Ref;
 import reengineering.ddd.accounting.model.Customer;
-import reengineering.ddd.accounting.model.Customers;
+import reengineering.ddd.accounting.model.CustomerRepository;
 
 import java.util.Random;
 
@@ -18,7 +18,7 @@ public class TestDataSetup implements BeforeAllCallback {
     public void beforeAll(ExtensionContext context) throws Exception {
         ApplicationContext springContext = SpringExtension.getApplicationContext(context);
         TestDataMapper testData = springContext.getBean(TestDataMapper.class);
-        Customers customers = springContext.getBean(Customers.class);
+        CustomerRepository customerRepository = springContext.getBean(CustomerRepository.class);
 
         String customerId = "1";
         String accountId = "1";
@@ -26,7 +26,7 @@ public class TestDataSetup implements BeforeAllCallback {
         testData.insertCustomer(customerId, "John Smith", "john.smith@email.com");
         testData.insertAccount(accountId, customerId, 100.00, "CNY");
 
-        Customer customer = customers.findById(customerId).get();
+        Customer customer = customerRepository.findById(customerId).get();
 
         for (var evidence = 0; evidence < 1000; evidence++) {
             var description = new SalesSettlementDescription(new Ref<>("ORD-" + new Random().nextInt()),
