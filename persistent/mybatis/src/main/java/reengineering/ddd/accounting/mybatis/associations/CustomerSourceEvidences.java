@@ -29,8 +29,13 @@ public class CustomerSourceEvidences extends EntityList<String, SourceEvidence<?
     @Override
     public SourceEvidence<?> add(SourceEvidenceDescription description) {
         IdHolder holder = new IdHolder();
+        // insert into source_evidences(customer_id, `type`) values(customerId, 'sales-settlement')
         mapper.insertSourceEvidence(holder, customerId, description);
+
+        // insert(sales_settlements)
+        // insert(sales_settlement_details)
         mapper.insertSourceEvidenceDescription(holder.id(), description);
+
         return mapper.findSourceEvidenceByCustomerAndId(customerId, holder.id());
     }
 

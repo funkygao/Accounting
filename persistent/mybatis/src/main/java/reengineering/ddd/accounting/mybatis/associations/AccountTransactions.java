@@ -35,6 +35,7 @@ public class AccountTransactions extends EntityList<String, Transaction> impleme
     @Override
     public Transaction add(Account account, SourceEvidence<?> evidence, TransactionDescription description) {
         IdHolder holder = new IdHolder();
+        // insert transactions
         mapper.insertTransaction(holder, account.getIdentity(), evidence.getIdentity(), description);
         return mapper.findTransactionByAccountAndId(accountId, holder.id());
     }

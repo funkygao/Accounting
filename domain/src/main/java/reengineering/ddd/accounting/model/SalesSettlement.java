@@ -8,6 +8,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 销售结算单：一种{@link SourceEvidence}.
+ *
+ * <p>此外，还有其他种类的业务单据原始凭证.</p>
+ */
 public class SalesSettlement implements SourceEvidence<SalesSettlementDescription> {
     private String identity;
     private SalesSettlementDescription description;
@@ -21,21 +26,6 @@ public class SalesSettlement implements SourceEvidence<SalesSettlementDescriptio
         this.identity = identity;
         this.description = description;
         this.transactions = transactions;
-    }
-
-    @Override
-    public String getIdentity() {
-        return identity;
-    }
-
-    @Override
-    public SalesSettlementDescription getDescription() {
-        return description;
-    }
-
-    @Override
-    public HasMany<String, Transaction> transactions() {
-        return transactions;
     }
 
     @Override
